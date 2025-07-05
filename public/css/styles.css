@@ -4,3 +4,163 @@
 *:after {
   box-sizing: border-box;
 }
+
+/* globals */
+:root {
+  /* colors */
+  --columbia-blue: #c5d5eaff;
+  --accent: #165379;
+  --white-tone: #FFFFFF;
+  --highlighter: #FF570A;
+  --black-tone: #333A3F;
+  /* sizes */
+  --size-1: 0.8rem;
+  --size-2: 1rem;
+  --size-3: 1.2rem;
+  --size-4: 1.5rem;
+  --size-5: 2rem;
+  /* fonts */
+  --header: "Libertinus Math", system-ui;
+  --content: "Raleway", sans-serif;
+  /* transition */
+  --type-1: all 1s ease-in-out;
+}
+
+h1,
+h2,
+h3,
+h4,
+h4,
+h6 {
+  font-family: var(--header);
+}
+
+body {
+  font-family: var(--content);
+}
+
+p,
+span,
+a {
+  font-family: var(--content);
+  color: var(--black-tone);
+}
+
+/* layout */
+.wrapper-content {
+  background-color: white;
+}
+
+/******** header ***************/
+.top-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.siteName a {
+  font-size: var(--size-5);
+  font-family: var(--header) !important;
+}
+
+.account a,
+.siteName a {
+  text-decoration: none;
+  padding: var(--size-1);
+}
+
+/******** nav ***************/
+nav {
+  background-color: var(--black-tone);
+  color: var(--white-tone);
+  font-size: var(--size-2);
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  padding-left: 0;
+  justify-content: center;
+}
+
+nav ul li {
+  list-style: none;
+  padding: var(--size-2);
+  transition: var(--tipe-1);
+}
+
+nav ul li:hover {
+  cursor: pointer;
+  background-color: var(--highlighter);
+}
+
+/******** main ***************/
+
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* hero */
+.hero {
+  background-image: url(../images/vehicles/delorean.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  background-position: center;
+}
+
+.hero ul {
+  padding: var(--size-2);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* upgrades */
+
+/* reviews */
+
+/******** footer ***************/
+
+/* medium and large screen */
+
+/* medium screen media queries */
+
+@media (min-width: 38em) {
+  .wrapper-content {
+    border-radius: var(--size-1);
+    border: 6px solid var(--accent);
+  }
+
+  body {
+    background-image: url(../images/site/small_check.jpg);
+    background-repeat: repeat;
+    background-size: auto;
+  }
+
+  nav ul {
+    justify-content: space-around;
+  }
+
+  .top-header {
+    padding: var(--size-2)
+  }
+
+  main {
+/*     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */
+  }
+}
+
+
+@media (min-width: 38em) and (max-width: 63.9em) {
+  .hero {
+    min-height: 300px;
+  }
+}
+
+/* large screen media queries */
+
+@media (min-width: 64em) {
+  .hero {
+    min-height: 480px;
+  }
+}
