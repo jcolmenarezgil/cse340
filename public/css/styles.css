@@ -46,9 +46,15 @@ a {
   color: var(--black-tone);
 }
 
+button {
+  all: unset;
+}
+
 /* layout */
 .wrapper-content {
   background-color: white;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 /******** header ***************/
@@ -85,7 +91,7 @@ nav ul {
 
 nav ul li {
   list-style: none;
-  padding: var(--size-2);
+  padding: 6px;
   transition: var(--tipe-1);
 }
 
@@ -102,24 +108,70 @@ main {
 }
 
 /* hero */
-.hero {
-  background-image: url(../images/vehicles/delorean.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  background-position: center;
+section.hero button {
+  padding: var(--size-1);
+  background-color: var(--highlighter);
+  font-weight: 600;
+  border-radius: var(--size-1);
 }
 
-.hero ul {
+section.hero {
+  background-image: url(../images/vehicles/delorean.jpg);
+  background-repeat: no-repeat;
+  width: 100%;
+  background-position: center;
+  background-size: contain;
+}
+
+section.hero ul {
   padding: var(--size-2);
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.8);
+  max-width: 40%;
 }
 
 /* upgrades */
+.upgrades {
+  display: grid;
+  gap: var(--size-1);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+
+.upgrades h2 {
+  grid-column: span 2;
+}
+
+.upgrades .item-upgrade {
+  border-radius: var(--size-1);
+  border: 1px solid #ddd;
+}
+
+.upgrades .item-upgrade a:hover {
+  color: var(--highlighter)
+}
+
+.upgrades .item-upgrade a img {
+  height: 80px;
+  width: fit-content;
+
+  mix-blend-mode: multiply;
+}
+
+.upgrades .item-upgrade a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--size-1);
+}
 
 /* reviews */
 
 /******** footer ***************/
+
+footer {
+  text-align: center;
+}
 
 /* medium and large screen */
 
@@ -137,6 +189,10 @@ main {
     background-size: auto;
   }
 
+  nav ul li {
+    padding: var(--size-2);
+  }
+
   nav ul {
     justify-content: space-around;
   }
@@ -145,22 +201,36 @@ main {
     padding: var(--size-2)
   }
 
-  main {
-/*     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */
-  }
-}
-
-
-@media (min-width: 38em) and (max-width: 63.9em) {
   .hero {
     min-height: 300px;
   }
+
+  main h1 {
+    grid-column: span 2;
+  }
+
+  main .hero {
+    grid-column: span 2;
+  }
+
+  main {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  main h1,
+  footer,
+  section {
+    padding: var(--size-1);
+  }
+
+  section.hero {
+    background-size: auto;
+  }
 }
+
+
+@media (min-width: 38em) and (max-width: 63.9em) {}
 
 /* large screen media queries */
 
-@media (min-width: 64em) {
-  .hero {
-    min-height: 480px;
-  }
-}
+@media (min-width: 64em) {}
