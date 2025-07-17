@@ -1,0 +1,12 @@
+<!-- classification view -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+        <!-- view message for next unit or show error -->
+        <%# messages() %>
+
+        <!-- deliver content -->
+         <%- grid %>

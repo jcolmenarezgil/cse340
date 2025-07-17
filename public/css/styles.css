@@ -78,8 +78,12 @@ button {
 /******** nav ***************/
 nav {
   background-color: var(--black-tone);
+}
+
+nav ul li a {
   color: var(--white-tone);
   font-size: var(--size-2);
+  text-decoration: none;
 }
 
 nav ul {
