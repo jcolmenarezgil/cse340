@@ -217,7 +217,7 @@ footer {
     grid-column: span 2;
   }
 
-  main {
+  .wrapper-content main {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
 
@@ -238,3 +238,138 @@ footer {
 /* large screen media queries */
 
 @media (min-width: 64em) {}
+
+ul#inv-display {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding-left: 0;
+    gap: 25px;
+}
+
+ul#inv-display li {
+    list-style: none;
+    overflow: hidden;
+    max-width: 320px;
+    padding: var(--size-2);
+}
+
+ul#inv-display li a img {
+    height: 120px;
+    width: fit-content;
+}
+
+li.inv-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#inv-display li img {
+    width: 200px;
+    height: fit-content;
+    border-radius: 16px;
+}
+
+.namePrice {
+    display: flex;
+    flex-direction: column;
+}
+
+#inv-display li h2 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+li.inv-list-item:hover {
+    background-color: var(--accent);
+    border-radius: var(--size-2);
+    cursor: pointer;
+    color: var(--white-tone);
+}
+
+li.inv-list-item a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.namePrice h2 {
+    color: inherit;
+    margin: 0;
+    text-align: center;
+}
+
+.namePrice span {
+    color: inherit;
+}
+
+hr {
+    color: var(--white-tone);
+    width: 100%;
+}
+
+#item-detail {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-column: span 2;
+}
+
+#item-detail .detail-image img {
+    max-width: 380px;
+}
+
+#item-detail .detail-image {
+    padding: var(--size-1);
+}
+
+.detail-info ul li {
+    list-style: none;
+    padding: var(--size-1);
+}
+
+.detail-info ul li:nth-child(odd) {
+    background-color: #eee;
+}
+
+a.goback-button {
+    font-weight: 600;
+}
+
+a.goback-button:hover {
+    color: var(--highlighter);
+}
+
+/* error page */
+.error-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.error-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.home-button {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 12px 25px;
+  background-color: #4C96D7; /* Un color azul amigable */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #3a7ab5;
+}

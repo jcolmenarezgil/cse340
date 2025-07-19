@@ -12,7 +12,8 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
-const utilities = require("./utilities/") 
+const utilities = require("./utilities/")
+const errorController = require("./controllers/errorController")
 
 /* ***********************
  * View Engine and Templates
@@ -27,30 +28,22 @@ app.set("layout", "./layouts/layout")
 app.use(static)
 
 // Index route
-app.get("/", baseController.builHome)
+app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
 
-// File Not Found Route - must be last route in list
-app.use(async (req, res, next) => {
-  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
-})
+// Route to trigger an intentional error
+app.get("/error", utilities.handleErrors(errorController.triggerError))
 
 /* ***********************
-* Express Error Handler
-* Place after all other middleware
+ * Middleware For Errors
 *************************/
-app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav();
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
-  res.render("errors/error", {
-    title: err.status || 'Server Error',
-    message: err.message,
-    nav
-  })
-})
+// File Not Found Route - debe ser la ÚLTIMA ruta normal
+app.use(errorController.build404)
 
+// Error Handling Middleware - se coloca al FINAL de todo
+app.use(errorController.build500)
 
 /* ***********************
  * Local Server Information

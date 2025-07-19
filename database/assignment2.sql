@@ -15,4 +15,4 @@ UPDATE public.inventory SET inv_description =  REPLACE(inv_description, 'small i
 SELECT inv_make, inv_model, classification_name FROM inventory i INNER JOIN classification c ON i.classification_id = c.classification_id WHERE c.classification_name = 'Sport';
 
 -- 6. Update images paths for inventory table for inv_images and inv_thumbnail
-UPDATE public.inventory SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'), inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles');
+UPDATE public.inventory SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'), inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');

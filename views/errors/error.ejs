@@ -1,6 +1,11 @@
-<% if (title) %>
-    <h1>
-        <%= title %>
-    </h1>
+<% if (title) { %>
+  <div class="error-container">
+    <h1><%= title %></h1>
+    <p><%- message %></p>
 
-    <%- message %>
+    <% if (locals.imageUrl) { %>
+      <img src="<%= locals.imageUrl %>" alt="Funny 404 error image" class="error-image">
+      <a href="/" title="Return to homepage" class="home-button">Go to Homepage</a>
+    <% } %>
+  </div>
+<% } %>
