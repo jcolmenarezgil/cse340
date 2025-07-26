@@ -17,6 +17,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
       title: className + " vehicles",
       nav,
       grid,
+      errors: null,
     })
   } catch (error) {
     next(error)
@@ -37,6 +38,7 @@ invCont.buildItemDetailId = async function (req, res, next) {
       title: inv_year + " " + inv_make + " " + inv_model,
       nav,
       grid_detail,
+      errors: null,
     })
   } catch (error) {
     next(error)
