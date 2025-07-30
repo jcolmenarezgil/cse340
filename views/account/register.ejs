@@ -5,7 +5,7 @@
 
 <div class="account-form">
     <p>All fields are required.</p>
-    <form action="/account/register" method="post">
+    <form action="/account/register" class="register-form" method="post">
         <label for="account_firstname"> First Name
             <input type="text" name="account_firstname" id="account_firstname" placeholder="Given Name" required
                 autocomplete="given-name" value="<%= locals.account_firstname %>"></label>
