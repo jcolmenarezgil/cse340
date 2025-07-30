@@ -101,11 +101,12 @@ invCont.buildAddInventory = async function (req, res, next) {
  * Process Add Classification
  * *************************** */
 invCont.processAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+
   try {
-    let nav = await utilities.getNav()
-    const { classification_name } = req.body
     const addResult = await invModel.addClassification(classification_name)
-    const addClassification = await utilities.buildAddClassification() // <-- reconstruye el formulario
+    const addClassification = await utilities.buildAddClassification()
 
     if (addResult) {
       req.flash("notice", `Great Job! you\'re registered ${classification_name} classification to the inventory..`)
@@ -120,7 +121,6 @@ invCont.processAddClassification = async function (req, res, next) {
       res.status(501).render("./inventory/add-classification", {
         title: "Add New Classification",
         nav,
-        addClassification,
         errors: null,
       })
     }

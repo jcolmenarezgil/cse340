@@ -1,6 +1,5 @@
 const utilities = require("../utilities/")
 const { body, validationResult } = require("express-validator")
-const invModel = require("../models/inventory-model")
 
 const validate = {}
 
@@ -67,14 +66,12 @@ validate.inventoryRules = () => {
         // inv_image
         body("inv_image")
             .trim()
-            .escape()
             .notEmpty()
             .withMessage("Please provide an image URL"),
 
         //inv_thumbnail
         body("inv_thumbnail")
             .trim()
-            .escape()
             .notEmpty()
             .withMessage("Please provide a thumbnail URL"),
 
@@ -112,10 +109,12 @@ validate.checkClassificationData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
+        const addClassification = await utilities.buildAddClassification()
         res.render("inventory/add-classification", {
             errors,
             title: "Add New Classification",
             nav,
+            addClassification,
             classification_name,
         })
         return
@@ -132,10 +131,12 @@ validate.checkInventoryData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
+        const addinventory = await utilities.buildAddInventory()
         res.render("inventory/add-inventory", {
             errors,
             title: "Add New Vehicle",
             nav,
+            addinventory,
             classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color
         })
         return

@@ -132,49 +132,59 @@ Util.buildAddClassification = async function (res, req, next) {
 /* **************************************
  * Build add inventory form with classificationList view
  * ************************************** */
-Util.buildAddInventory = async function () {
-  let classificationList = await Util.buildClassificationList()
+Util.buildAddInventory = async function ({
+  classification_id = "",
+  inv_make = "",
+  inv_model = "",
+  inv_description = "",
+  inv_image = "/images/vehicles/no-image.png",
+  inv_thumbnail = "/images/vehicles/no-image.png",
+  inv_price = "",
+  inv_year = "",
+  inv_miles = "",
+  inv_color = ""
+} = {}) {
+  let classificationList = await Util.buildClassificationList(classification_id)
   let addInventory = '<div class="add-inventory" id="add-inventory">'
   addInventory += '<form action="/inv/add-inventory" class="inventory-form" method="post">'
   addInventory += '<label for="classificationList">Classification'
   addInventory += classificationList
   addInventory += '</label>'
   addInventory += '<label for="inv_make">Make'
-  addInventory += '<input type="text" name="inv_make" id="inv_make" placeholder="Min of 3 characters" pattern="^[a-zA-Z]+$" required>'
+  addInventory += `<input type="text" name="inv_make" id="inv_make" value="${inv_make}" placeholder="Min of 3 characters" pattern="^[a-zA-Z]+$" required>`
   addInventory += '</label>'
   addInventory += '<label for="inv_model">Model'
-  addInventory += '<input type="text" name="inv_model" id="inv_model" placeholder="Min of 3 characters" pattern="^[a-zA-Z0-9 .-]+$" required>'
+  addInventory += `<input type="text" name="inv_model" id="inv_model" value="${inv_model}" placeholder="Min of 3 characters" pattern="^[a-zA-Z0-9 .-]+$" required>`
   addInventory += '</label>'
   addInventory += '<label for="inv_description">Description'
-  addInventory += '<textarea name="inv_description" id="inv_description" rows="3" cols="30" required></textarea>'
+  addInventory += `<textarea name="inv_description" id="inv_description" rows="3" cols="30" required>${inv_description}</textarea>`
   addInventory += '</label>'
   addInventory += '<label for="inv_image">Image Path'
-  addInventory += '<input type="text" name="inv_image" id="inv_image" value="/images/vehicles/no-image.png" required>'
+  addInventory += `<input type="text" name="inv_image" id="inv_image" value="${inv_image}" required>`
   addInventory += '</label>'
   addInventory += '<label for="inv_thumbnail">Thumbnail Path'
-  addInventory += '<input type="text" name="inv_thumbnail" id="inv_thumbnail" value="/images/vehicles/no-image.png" required>'
+  addInventory += `<input type="text" name="inv_thumbnail" id="inv_thumbnail" value="${inv_thumbnail}" required>`
   addInventory += '</label>'
   addInventory += '<div class="inline-group">'
   addInventory += '<label for="inv_price">Price'
-  addInventory += '<input type="number" name="inv_price" id="inv_price" placeholder="decimals or whole numbers only" pattern="[0-9]*(\.[0-9]{1,2})?" required>'
+  addInventory += `<input type="number" name="inv_price" id="inv_price" value="${inv_price}" placeholder="decimals or whole numbers only" pattern="[0-9]*(\.[0-9]{1,2})?" required>`
   addInventory += '</label>'
   addInventory += '<label for="inv_year">Year'
-  addInventory += '<input type="number" name="inv_year" id="inv_year" placeholder="YYYY (numbers only)" pattern="[0-9]{4}" required>'
+  addInventory += `<input type="number" name="inv_year" id="inv_year" value="${inv_year}" placeholder="YYYY (numbers only)" pattern="[0-9]{4}" required>`
   addInventory += '</label>'
   addInventory += '</div>'
   addInventory += '<div class="inline-group">'
   addInventory += '<label for="inv_miles">Miles'
-  addInventory += '<input type="number" name="inv_miles" id="inv_miles" placeholder="digits only" required>'
+  addInventory += `<input type="number" name="inv_miles" id="inv_miles" value="${inv_miles}" placeholder="digits only" required>`
   addInventory += '</label>'
   addInventory += '<label for="inv_color">Color'
-  addInventory += '<input type="text" name="inv_color" id="inv_color" required>'
+  addInventory += `<input type="text" name="inv_color" id="inv_color" value="${inv_color}" required>`
   addInventory += '</label>'
   addInventory += '</div>'
   addInventory += '<button type="submit">Add New Vehicle</button>'
   addInventory += '</form>'
   return addInventory;
 }
-
 
 /* ****************************************
  * Middleware For Handling Errors
