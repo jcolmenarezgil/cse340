@@ -12,7 +12,10 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
 // Route to build account management view
-router.get("/", utilities.handleErrors(accountController.buildAccount));
+router.get(
+  "/",
+  utilities.checkLogin, 
+  utilities.handleErrors(accountController.buildAccount));
 
 // Router to register user usign post
 router.post(
