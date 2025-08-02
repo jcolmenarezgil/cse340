@@ -18,6 +18,7 @@ const errorController = require("./controllers/errorController")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 /* ***********************
  * View Engine and Templates
@@ -53,6 +54,12 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 /* ***********************
  * Routes
  *************************/
+// Login
+app.use(cookieParser())
+// Login Process
+app.use(utilities.checkJWTToken)
+
+// Static files
 app.use(static)
 
 // Index route
