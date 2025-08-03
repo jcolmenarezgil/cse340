@@ -11,6 +11,13 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 // Route to build item detail view
 router.get("/detail/:itemdetailId", invController.buildItemDetailId);
 
+// Get inventory for AJAX Route
+router.get(
+    "/getInventory/:classification_id",
+    /* utilities.checkAccountType, */
+    utilities.handleErrors(invController.getInventoryJSON)
+)
+
 // Route to build inv management view
 router.get("/management", invController.buildInvManagement);
 
