@@ -27,6 +27,12 @@ router.get("/add-classification", invController.buildAddClassification);
 // Route to build add vehicle
 router.get("/add-inventory", invController.buildAddInventory);
 
+// Route to edit vehicle (Check if loggin and handleErrors)
+router.get(
+    "/edit/:inv_id", 
+    utilities.checkLogin, 
+    utilities.handleErrors(invController.buildEditInventory));
+
 // Router to register new classificaton
 router.post(
     "/add-classification",

@@ -45,6 +45,41 @@ invCont.buildItemDetailId = async function (req, res, next) {
 }
 
 /* ***************************
+ * Build edit inventory controller
+ * *************************** */
+invCont.buildEditInventory = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.inv_id)
+    const data = await invModel.getItemDetailById(inv_id)
+    const classificationsData = await invModel.getClassifications()
+    let nav = await utilities.getNav()
+    const { inv_make, inv_model } = data[0]
+    res.render("./inventory/edit-inventory", {
+      title: `Editing ${inv_make} ${inv_model}`,
+      nav,
+      classifications: classificationsData.rows, // Pasar el array de clasificaciones
+      classification_id: data.classification_id, // Pasar el ID de la clasificación actual
+      errors: null,
+      inv_id: data[0].inv_id,
+      inv_make: data[0].inv_make,
+      inv_model: data[0].inv_model,
+      inv_year: data[0].inv_year,
+      inv_description: data[0].inv_description,
+      inv_image: data[0].inv_image,
+      inv_thumbnail: data[0].inv_thumbnail,
+      inv_price: data[0].inv_price,
+      inv_miles: data[0].inv_miles,
+      inv_color: data[0].inv_color,
+      classification_id: data[0].classification_id,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+
+
+/* ***************************
  * Build inv management controller
  * *************************** */
 invCont.buildInvManagement = async function (req, res, next) {
@@ -173,6 +208,24 @@ invCont.getInventoryJSON = async function (req, res, next) {
   } else {
     next(new Error("No data returned"))
   }
+}
+
+/* ***************************
+ * Build edit item view
+ * *************************** */
+invCont.editInvItemView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  let nav = await utilities.getNav()
+  const invData = await invModel.getItemDetailById(inv_id)
+  const classificationSelect = await invModel.buildClassificationList(invData.classification_id)
+  const itemName = `${invData.inv_make} ${invData.inv_model}`
+  res.render("./inventory/edit-vehicle", {
+    title: `Edit ${itemName}`,
+    nav,
+    errors: null,
+    invData,
+    classificationSelect,
+  })
 }
 
 module.exports = invCont
