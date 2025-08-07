@@ -20,14 +20,13 @@
                     <!-- deliver content -->
 
                     <div class="add-inventory" id="add-inventory">
-                        <form action="/inv/update" class="inventory-form" method="post">
+                        <form id="updateForm" action="/inv/update" class="inventory-form" method="post">
                             <label for="classificationList">Classification
                                 <select name="classification_id" id="classificationList" required>
                                     <option value="">Choose a classification</option>
                                     <% if(locals.classifications) { %>
                                         <% locals.classifications.forEach(classification => { %>
-                                            <option value="<%= classification.classification_id %>"
-                                            <%= (locals.classification_id == classification.classification_id) ? 'selected' : '' %>>
+                                            <option value="<%= classification.classification_id %>" <%= (locals.classification_id == classification.classification_id) ? 'selected' : '' %>>
                                                 <%= classification.classification_name %>
                                             </option>
                                         <% }) %>
@@ -35,45 +34,39 @@
                                 </select>
                             </label>
                             <label for="inv_make">Make
-                                <input type="text" name="inv_make" id="inv_make" value="<%= locals.inv_make %>"
-                                    placeholder="Min of 3 characters" pattern="^[a-zA-Z]+$" required>
+                                <input type="text" name="inv_make" id="inv_make" placeholder="Min of 3 characters" pattern="^[a-zA-Z]+$" required value="<%= locals.inv_make || '' %>">
                             </label>
                             <label for="inv_model">Model
-                                <input type="text" name="inv_model" id="inv_model" value="<%= locals.inv_model %>"
-                                    placeholder="Min of 3 characters" pattern="^[a-zA-Z0-9 .-]+$" required>
+                                <input type="text" name="inv_model" id="inv_model" placeholder="Min of 3 characters" pattern="^[a-zA-Z0-9 .-]+$" required value="<%= locals.inv_model || '' %>">
                             </label>
                             <label for="inv_description">Description
-                                <textarea name="inv_description" id="inv_description" rows="3" cols="30"
-                                    required><%= locals.inv_description  %></textarea>
+                                <textarea name="inv_description" id="inv_description" rows="3" cols="30" required><%= locals.inv_description || '' %></textarea>
                             </label>
                             <label for="inv_image">Image Path
-                                <input type="text" name="inv_image" id="inv_image" value="<%= locals.inv_image %>"
-                                    required>
+                                <input type="text" name="inv_image" id="inv_image" required value="<%= locals.inv_image || '' %>">
                             </label>
                             <label for="inv_thumbnail">Thumbnail Path
-                                <input type="text" name="inv_thumbnail" id="inv_thumbnail"
-                                    value="<%= locals.inv_thumbnail %>" required>
+                                <input type="text" name="inv_thumbnail" id="inv_thumbnail" required value="<%= locals.inv_thumbnail || '' %>">
                             </label>
                             <div class="inline-group">
                                 <label for="inv_price">Price
-                                    <input type="number" name="inv_price" id="inv_price" value="<%= locals.inv_price %>"
-                                        placeholder="decimals or whole numbers only" pattern="[0-9]*(\.[0-9]{1,2})?"
-                                        required>
+                                    <input type="number" name="inv_price" id="inv_price" placeholder="decimals or whole numbers only" pattern="[0-9]*(\.[0-9]{1,2})?" required value="<%= locals.inv_price || '' %>">
                                 </label>
                                 <label for="inv_year">Year
-                                    <input type="number" name="inv_year" id="inv_year" value="<%= locals.inv_year %>"
-                                        placeholder="YYYY (numbers only)" pattern="[0-9]{4}" required>
+                                    <input type="number" name="inv_year" id="inv_year" placeholder="YYYY (numbers only)" pattern="[0-9]{4}" required value="<%= locals.inv_year || '' %>">
                                 </label>
                             </div>
                             <div class="inline-group">
                                 <label for="inv_miles">Miles
-                                    <input type="number" name="inv_miles" id="inv_miles" value="<%= locals.inv_miles %>"
-                                        placeholder="digits only" required>
+                                    <input type="number" name="inv_miles" id="inv_miles" placeholder="digits only" required value="<%= locals.inv_miles || '' %>">
                                 </label>
                                 <label for="inv_color">
-                                    <input type="text" name="inv_color" id="inv_color" value="<%= locals.inv_color %>"
-                                        required>
+                                    <input type="text" name="inv_color" id="inv_color" required value="<%= locals.inv_color || '' %>">
                                 </label>
                             </div>
-                            <button type="submit" name="submit">Update Vehicle</button>
+                            <input type="hidden" name="inv_id" value="<%= locals.inv_id || '' %>">
+                            <button type="submit" name="submit" disabled>Update Vehicle</button>
                         </form>
+                    </div>
+
+                    <script src="/js/inv-update.js" defer></script>

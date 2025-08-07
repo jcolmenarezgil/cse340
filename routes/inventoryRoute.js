@@ -33,6 +33,13 @@ router.get(
     utilities.checkLogin, 
     utilities.handleErrors(invController.buildEditInventory));
 
+// Router to update vehicle
+router.post(
+    "/update",
+    regValidate.inventoryRules(),
+    regValidate.checkUpdateData,
+    utilities.handleErrors(invController.updateInventory));
+    
 // Router to register new classificaton
 router.post(
     "/add-classification",

@@ -57,8 +57,8 @@ invCont.buildEditInventory = async function (req, res, next) {
     res.render("./inventory/edit-inventory", {
       title: `Editing ${inv_make} ${inv_model}`,
       nav,
-      classifications: classificationsData.rows, // Pasar el array de clasificaciones
-      classification_id: data.classification_id, // Pasar el ID de la clasificación actual
+      classifications: classificationsData.rows,
+      classification_id: data.classification_id,
       errors: null,
       inv_id: data[0].inv_id,
       inv_make: data[0].inv_make,
@@ -77,7 +77,65 @@ invCont.buildEditInventory = async function (req, res, next) {
   }
 }
 
+/* ***************************
+ * Build update/edit inventory controller
+ * *************************** */
+invCont.updateInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body
+  const updateResult = await invModel.updateInventory(
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  )
 
+  if (updateResult) {
+    const itemName = updateResult.inv_make + " " + updateResult.inv_model
+    req.flash("notice", `The ${itemName} was successfully updated.`)
+    res.redirect("/inv/management")
+  } else {
+    const classificationSelect = await utilities.buildClassificationList(classification_id)
+    const itemName = `${inv_make} ${inv_model}`
+    req.flash("notice", "Sorry, the insert failed.")
+    res.status(501).render("inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect: classificationSelect,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
+    })
+  }
+}
 
 /* ***************************
  * Build inv management controller

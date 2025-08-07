@@ -51,6 +51,13 @@ button {
   all: unset;
 }
 
+button:disabled, button:disabled:hover {
+  background-color: #a8a8a8;
+  color: #000;
+  filter: none;
+  cursor: not-allowed;
+}
+
 /* layout */
 .wrapper-content {
   background-color: white;
