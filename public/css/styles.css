@@ -501,7 +501,6 @@ button {
 
 input:read-only {
   border: #a8a8a8;
-  background-color: lavender;
   color: #000;
   cursor: not-allowed;
 }
@@ -554,4 +553,10 @@ span.pswBtn-style {
 form {
   display: grid;
   justify-items: center;
+}
+
+form fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

@@ -89,11 +89,12 @@ invCont.buildDeleteView = async function (req, res, next) {
     title: `Are you sure you want to delete ${itemName}?`,
     nav,
     errors: null,
-    inv_id: itemName.inv_id,
-    inv_make: itemName.inv_make,
-    inv_model: itemName.inv_model,
-    inv_year: itemName.inv_year,
-    inv_price: itemName.inv_price,
+    inv_id: data[0].inv_id,
+    inv_make: data[0].inv_make,
+    inv_model: data[0].inv_model,
+    inv_year: data[0].inv_year,
+    inv_price: data[0].inv_price,
+    inv_image: data[0].inv_image,
   })
 }
 
