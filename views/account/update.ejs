@@ -10,7 +10,7 @@
   </ul>
 <% } %>
 
-<form class="account-form" action="/account/update-account" method="post">
+<form id="updateForm" class="account-form" action="/account/update-account" method="post">
   <fieldset>
     <legend>Update Account Details</legend>
     <label for="account_firstname">First Name:
@@ -23,20 +23,27 @@
       <input type="email" id="account_email" name="account_email" required value="<%= account_email %>">
     </label>
     <input type="hidden" name="account_id" value="<%= account_id %>">
-    <button type="submit">Update Account</button>
+    <button type="submit" disabled>Update Account</button>
   </fieldset>
 </form>
+
+<script src="/js/update.js" defer></script>
 
 <br>
 
 <form class="account-form" action="/account/update-password" method="post">
     <fieldset>
         <legend>Update Password</legend>
-        <p>Password must be at least 12 characters long, contain at least 1 capital letter, 1 number and 1 special character.</p>
+        <div id="hint"></div>
         <label for="account_password">New Password:
-            <input type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+            <input type="password" name="account_password" id="account_password" placeholder="Password" required
+                autocomplete="off" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+                title="Password must be at least 12 characters long and contain at least 1 number, 1 capital letter, and 1 special character.">
+                <span id="pswBtn" class="pswBtn-style">Show Password</span>
         </label>
         <input type="hidden" name="account_id" value="<%= account_id %>">
         <button type="submit">Update Password</button>
     </fieldset>
 </form>
+
+<script src="/js/script.js" defer></script>
