@@ -6,7 +6,7 @@ const Util = {}
 /* ***************************
 *  Build inventory by classification view
 * ************************** */
-Util.getNav = async function (req, res, next) {
+Util.getNav = async function () {
   let data = await invModel.getClassifications()
   console.log(data.rows)
   let list = "<ul>"

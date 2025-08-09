@@ -126,4 +126,13 @@ accountCont.registerAccount = async function (req, res) {
   }
 }
 
+/* ****************************************
+*  Process logout request
+* *************************************** */
+accountCont.accountLogout = (req, res) => {
+  res.clearCookie("jwt")
+  req.flash("notice", "You have been logged out.")
+  return res.redirect("/")
+}
+
 module.exports = accountCont 

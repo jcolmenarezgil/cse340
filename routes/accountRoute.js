@@ -8,6 +8,10 @@ const regValidate = require('../utilities/account-validation')
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
+// Route to detect logout request
+router.get("/logout", utilities.handleErrors(accountController.accountLogout));
+
+
 // Route to build regiter view
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
