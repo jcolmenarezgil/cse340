@@ -110,4 +110,17 @@ async function addClassification(classification_name) {
     }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getItemDetailById, addInventory, addClassification, updateInventory }
+/* **************************************
+ * Delete inventory item from public.inventory
+ * ************************************** */
+async function deleteInventoryItem(inv_id) {
+    try {
+        const sql = `DELETE FROM public.inventory WHERE inv_id = $1`
+        const data = await pool.query(sql, [inv_id])
+        return data
+    } catch (error) {
+        new Error("Delete Inventory Item Error")
+    }
+}
+
+module.exports = { getClassifications, getInventoryByClassificationId, getItemDetailById, addInventory, addClassification, updateInventory, deleteInventoryItem }

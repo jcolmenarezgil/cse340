@@ -78,6 +78,42 @@ invCont.buildEditInventory = async function (req, res, next) {
 }
 
 /* ***************************
+ * Build delete inventory controller
+ * *************************** */
+invCont.buildDeleteView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  let nav = await utilities.getNav()
+  const data = await invModel.getItemDetailById(inv_id)
+  const itemName = `${data[0].inv_make} ${data[0].inv_model}`
+  res.render("./inventory/delete-confirm", {
+    title: `Are you sure you want to delete ${itemName}?`,
+    nav,
+    errors: null,
+    inv_id: itemName.inv_id,
+    inv_make: itemName.inv_make,
+    inv_model: itemName.inv_model,
+    inv_year: itemName.inv_year,
+    inv_price: itemName.inv_price,
+  })
+}
+
+/* ***************************
+ * Process delete inventory action controller
+ * *************************** */
+invCont.deleteItem = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const inv_id = parseInt(req.body.inv_id)
+  const deleteResult = await invModel.deleteInventoryItem(inv_id)
+  if(deleteResult) {
+    req.flash("notice", 'The deletion was successful.')
+    res.redirect("/inv/management")
+  } else {
+    req.flash("notice", 'Sorry, the deletion failed')
+    res.redirect("/inv/delete/inv_id")
+  }
+}
+
+/* ***************************
  * Build update/edit inventory controller
  * *************************** */
 invCont.updateInventory = async function (req, res, next) {

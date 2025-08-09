@@ -499,6 +499,13 @@ button {
   display: block;
 }
 
+input:read-only {
+  border: #a8a8a8;
+  background-color: lavender;
+  color: #000;
+  cursor: not-allowed;
+}
+
 .pswBtn-style {
   cursor: pointer;
   color: var(--accent);
