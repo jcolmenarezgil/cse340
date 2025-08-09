@@ -34,10 +34,39 @@ accountCont.buildRegister = async function (req, res, next) {
 * *************************************** */
 accountCont.buildAccount = async function (req, res, next) {
   let nav = await utilities.getNav()
+  const accountData = res.locals.accountData
+  let accountManagement = `<div class="account-management span_2">`
+  accountManagement += `<h2>Welcome ${accountData.account_firstname}</h2>`
+  accountManagement += '<h3>Account Management</h3>'
+  accountManagement += `<p><a href="/account/update-account/${accountData.account_id}" title="Click to update account information.">Update Account Information</a></p>`
+  if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') {
+    accountManagement += '<h3>Inventory Management</h3>'
+    accountManagement += '<p><a href="/inv/management" title="Click to manage inventory.">Go to Inventory Management</a></p>'
+  }
+  accountManagement += `</div>`
   res.render("account/index", {
-    title: "Account",
+    title: "Account Management",
     nav,
     errors: null,
+    accountManagement,
+  })
+}
+
+/* ****************************************
+*  Deliver Account Update view
+* *************************************** */
+accountCont.buildUpdateAccountView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const account_id = parseInt(req.params.account_id)
+  const data = await accountModel.getAccountById(account_id)
+  res.render("account/update", {
+    title: "Update Account Information",
+    nav,
+    errors: null,
+    account_firstname: data.account_firstname,
+    account_lastname: data.account_lastname,
+    account_email: data.account_email,
+    account_id: data.account_id,
   })
 }
 

@@ -21,6 +21,13 @@ router.get(
   utilities.checkLogin, 
   utilities.handleErrors(accountController.buildAccount));
 
+// Route to build account update view
+router.get(
+  "/update-account/:account_id",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildUpdateAccountView)
+);
+
 // Router to register user usign post
 router.post(
     "/register",
