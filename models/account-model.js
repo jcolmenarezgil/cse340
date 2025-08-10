@@ -81,5 +81,16 @@ async function updatePassword(account_password, account_id) {
     }
 }
 
+/* ****************************************
+*  Get all accounts
+* *************************************** */
+async function getAccounts() {
+    try {
+        return await pool.query("SELECT account_id, account_firstname, account_lastname FROM public.account ORDER BY account_lastname, account_firstname")
+    } catch (error) {
+        console.error("getAccounts error " + error)
+        throw error
+    }
+}
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccountInfo, updatePassword }
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccountInfo, updatePassword, getAccounts }

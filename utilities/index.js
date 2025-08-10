@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const accountModel = require("../models/account-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const Util = {}
@@ -246,6 +247,53 @@ Util.checkAuthorization = (req, res, next) => {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
+}
+
+/* ****************************************
+* Build recipient list for new message form
+* *************************************** */
+Util.buildRecipientList = async function (current_account_id, selected_recipient_id = null) {
+  let data = await accountModel.getAccounts()
+  let list = '<select id="message_to" name="message_to" required>'
+  list += '<option value="">Choose a recipient</option>'
+  data.rows.forEach((row) => {
+    if (row.account_id !== current_account_id) {
+      list += `<option value="${row.account_id}"`
+      if (selected_recipient_id != null && row.account_id == selected_recipient_id) {
+          list += " selected"
+      }
+      list += `>${row.account_firstname} ${row.account_lastname}</option>`
+    }
+  })
+  list += "</select>"
+  return list
+}
+
+/* ****************************************
+* Build message grid HTML
+* *************************************** */
+Util.buildMessageGrid = function (data, title) {
+    let grid = '<h2>' + title + '</h2>'
+    if (data.length > 0) {
+        grid += '<table class="message-table">'
+        grid += '<thead>'
+        grid += '<tr><th>Received</th><th>Subject</th><th>From</th><th>Read</th></tr>'
+        grid += '</thead>'
+        grid += '<tbody>'
+        data.forEach(message => {
+            grid += `<tr class="${message.message_read ? 'read' : 'unread'}">`
+            grid += `<td>${new Date(message.message_created).toLocaleDateString("en-US")}</td>`
+            grid += `<td><a href="/message/read/${message.message_id}">${message.message_subject}</a></td>`
+            grid += `<td>${message.account_firstname} ${message.account_lastname}</td>`
+            grid += `<td>${message.message_read}</td>`
+            grid += '</tr>'
+        })
+        grid += '</tbody>'
+        grid += '</table>'
+    } else {
+        grid += '<p class="notice">No messages to display.</p>'
+    }
+    return grid
 }
 
 module.exports = Util

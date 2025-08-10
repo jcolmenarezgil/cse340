@@ -1,5 +1,6 @@
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
+const messageModel = require("../models/message-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -39,6 +40,17 @@ accountCont.buildAccount = async function (req, res, next) {
   accountManagement += `<h2>Welcome ${accountData.account_firstname}</h2>`
   accountManagement += '<h3>Account Management</h3>'
   accountManagement += `<p><a href="/account/update-account/${accountData.account_id}" title="Click to update account information.">Update Account Information</a></p>`
+
+  // Add Message Center
+  accountManagement += '<h3>Message Center</h3>'
+  accountManagement += '<ul>'
+  const unreadCount = await messageModel.countUnreadMessage(accountData.account_id)
+  if (unreadCount > 0) {
+    accountManagement += `<li><p><strong>You have ${unreadCount} unread message(s).</strong></p></li>`
+  }
+  accountManagement += `<li><p>Go to <a href="/message" title="Go to your inbox">Inbox</a></p></li>`
+  accountManagement += '</ul>'
+
   if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') {
     accountManagement += '<h3>Inventory Management</h3>'
     accountManagement += '<p><a href="/inv/management" title="Click to manage inventory.">Go to Inventory Management</a></p>'

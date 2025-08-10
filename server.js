@@ -13,6 +13,7 @@ const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
+const messageRoute = require("./routes/messageRoute")
 const utilities = require("./utilities/")
 const errorController = require("./controllers/errorController")
 const session = require("express-session")
@@ -70,6 +71,9 @@ app.use("/inv", utilities.handleErrors(inventoryRoute));
 
 // Account routes
 app.use("/account", utilities.handleErrors(accountRoute));
+
+// Message routes
+app.use("/message", utilities.handleErrors(messageRoute));
 
 // Route to trigger an intentional error
 app.get("/error", utilities.handleErrors(errorController.triggerError))

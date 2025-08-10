@@ -251,16 +251,21 @@ footer {
 
 @media (min-width: 38em) and (max-width: 63.9em) {
 
+  .delete-confirm-container,
+  .message-container,
+  .inbox-container,
   .add-inventory,
+  .compose-form,
   .account-form,
-  .add-classification {
+  .add-classification,
+  .inbox-container {
     grid-column: span 2;
     max-width: 480px;
     display: grid !important;
-    gap: 20px;
   }
 
   .add-inventory,
+  .compose-form,
   .add-classification {
     min-width: 480px;
   }
@@ -275,15 +280,12 @@ footer {
 
 @media (min-width: 64em) {
 
-  .add-inventory,
-  .account-form {
-    grid-column: span 2;
-    min-width: 480px;
-    display: grid;
-  }
-
+  .delete-confirm-container,
+  .message-container,
+  .inbox-container,
   .add-inventory,
   .account-form,
+  .compose-form,
   .add-classification {
     grid-column: span 2;
     max-width: 480px;
@@ -449,6 +451,9 @@ a.goback-button:hover {
   font-style: italic;
 }
 
+.compose-form input,
+.compose-form select,
+.compose-form textarea,
 .account-form input,
 .add-inventory input,
 .add-inventory textarea,
@@ -463,6 +468,9 @@ a.goback-button:hover {
   width: 100%;
 }
 
+.compose-form label:has(input[required])::before,
+.compose-form label:has(select[required])::before,
+.compose-form label:has(textarea[required])::before,
 .classification-form label:has(input[required])::before,
 .add-inventory label:has(select[required])::before,
 .add-inventory label:has(input[required])::before,
@@ -474,6 +482,10 @@ a.goback-button:hover {
   margin-right: 4px;
 }
 
+.compose-form,
+.inbox-container,
+.classification-form,
+.add-inventory,
 .account-form,
 .inventory-form {
   margin: 0 auto;
@@ -491,6 +503,7 @@ a.goback-button:hover {
   font-weight: 600;
 }
 
+.compose-form span,
 .account-form span {
   padding: var(--size-2);
   display: flex;
@@ -537,6 +550,7 @@ ul.notice {
   list-style: square;
 }
 
+form.compose-form label,
 form.inventory-form label,
 form.account-form label,
 form.login-form label,
@@ -547,6 +561,7 @@ form.classification-form label {
   display: inline-block;
 }
 
+.compose-form label,
 .account-form label {
   font-weight: 600;
   padding: var(--size-2);
@@ -581,4 +596,50 @@ form fieldset {
 
 .account-management {
   padding: var(--size-2);
+}
+
+.form-group {
+  width: 100%;
+}
+
+.true {
+  color: rgb(10, 100, 100);
+  font-weight: 600;
+}
+
+.false {
+  color: brown;
+}
+
+table {
+  text-align: center;
+}
+
+.inbox-controls {
+    display: grid;
+}
+
+.message-options,
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-buttons a,
+.message-container a {
+    margin: var(--size-2);
+    text-decoration: none;
+    background-color: var(--accent);
+    color: #fff;
+    padding: var(--size-1);
+    align-items: center;
+    min-width: 180px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.message-container {
+    display: flex;
 }
