@@ -21,4 +21,4 @@ CREATE TABLE public.message
 );
 
 ALTER TABLE IF EXISTS public.message
-    OWNER to dbcse340;
+    OWNER to cse340dbe;
